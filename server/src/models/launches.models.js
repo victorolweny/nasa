@@ -102,7 +102,8 @@ async function saveLaunch(launch) {
   return await launchesDatabase.findOneAndUpdate({
     flightNumber: launch.flightNumber
   }, launch, {
-    upsert: true
+    upsert: true,
+    returnOriginal: false
   })
 }
 
@@ -123,7 +124,7 @@ async function scheduleNewLaunch(launch) {
     flightNumber: newFlightNumber
   }
 
-  await saveLaunch(newLaunch)
+  return await saveLaunch(newLaunch)
 }
 
 async function abortLaunchById(launchId) {
