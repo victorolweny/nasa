@@ -87,9 +87,7 @@ async function getLatestFlightNumber() {
   const latestLaunch = await launchesDatabase.findOne()
     .sort('-flightNumber')
 
-  if(!latestLaunch) DEFAULT_FLIGHT_NUMBER;
-
-  return latestLaunch.flightNumber
+  return (!latestLaunch) ? DEFAULT_FLIGHT_NUMBER : latestLaunch.flightNumber
 }
 
 async function getAllLaunches(skip, limit) {
